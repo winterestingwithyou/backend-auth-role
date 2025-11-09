@@ -8,7 +8,7 @@ app.use(
 	"/api/auth/*", 
 	(c, next) => {
 		const corsMiddleware = cors({
-			origin: c.env.CORS_ORIGIN,
+			origin: c.env.CORS_ORIGIN.split(","),
       allowHeaders: ["Content-Type", "Authorization"],
       allowMethods: ["POST", "GET", "OPTIONS"],
       exposeHeaders: ["Content-Length"],
