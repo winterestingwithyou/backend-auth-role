@@ -11,7 +11,7 @@ import { betterAuthOptions } from './src/lib/better-auth/options';
 
 import * as schema from "./src/db/schema";
 
-const { DATABASE_URL, BETTER_AUTH_URL, BETTER_AUTH_SECRET } = process.env;
+const { DATABASE_URL, BETTER_AUTH_URL, BETTER_AUTH_SECRET, CORS_ORIGIN } = process.env;
 
 const sql = neon(DATABASE_URL!);
 const db = drizzle(sql);
@@ -21,4 +21,5 @@ export const auth: ReturnType<typeof betterAuth> = betterAuth({
   database: drizzleAdapter(db, { provider: 'pg', schema }),
   baseURL: BETTER_AUTH_URL,
   secret: BETTER_AUTH_SECRET,
+  trustedOrigins: CORS_ORIGIN!.split(","),
 });
